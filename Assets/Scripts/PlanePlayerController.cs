@@ -1,7 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class PlanePlayerController : MonoBehaviour {
+public class PlanePlayerController : MonoBehaviour 
+{
+    public GameObject Me;
 
 	// Use this for initialization
 	void Start () {
@@ -15,13 +17,15 @@ public class PlanePlayerController : MonoBehaviour {
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log(@"enter collider");
-        other.gameObject.layer = 10;
+        Debug.Log(@"enter collider : " + other.gameObject.name + @" - " + Me.name);
+        if(other.gameObject.layer != 8 && other.gameObject != Me)
+            other.gameObject.layer = 10;
     }
 
     private void OnTriggerExit(Collider other)
     {
-        Debug.Log(@"exit collider");
-        other.gameObject.layer = 0;
+        Debug.Log(@"exit collider : " + other.gameObject.name + @" - " + Me.name);
+        if(other.gameObject.layer != 8 && other.gameObject != Me)
+            other.gameObject.layer = 0;
     }
 }
