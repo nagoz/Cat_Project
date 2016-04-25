@@ -3,7 +3,7 @@ using System.Collections;
 
 public class PlanePlayerController : MonoBehaviour 
 {
-    public GameObject Me;
+    public PlayerController Me;
 
 	// Use this for initialization
 	void Start () {
@@ -18,14 +18,16 @@ public class PlanePlayerController : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         Debug.Log(@"enter collider : " + other.gameObject.name + @" - " + Me.name);
-        if(other.gameObject.layer != 8 && other.gameObject != Me)
+
+        if (other.gameObject.layer != 8 && !other.name.EndsWith("Local"))
             other.gameObject.layer = 10;
     }
 
     private void OnTriggerExit(Collider other)
     {
         Debug.Log(@"exit collider : " + other.gameObject.name + @" - " + Me.name);
-        if(other.gameObject.layer != 8 && other.gameObject != Me)
+
+        if (other.gameObject.layer != 8 && !other.name.EndsWith("Local"))
             other.gameObject.layer = 0;
     }
 }
