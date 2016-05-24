@@ -6,22 +6,30 @@ public class PlayerController : NetworkBehaviour
 {
     public float Force = 0.2f;
     public float Rotation = 1f;
+    public Camera Camera = null;
     private Rigidbody _rigidBody = null;
     private Vector3 _movement;
     private Quaternion _rotation;
-    private bool _isLocalPlayer;
 
-	void Start ()
+    void Awake()
     {
+        Debug.Log(@"Local Player Awake");
         _rigidBody = this.GetComponent<Rigidbody>();
-        _isLocalPlayer = this.isLocalPlayer;
-        if(_isLocalPlayer)
+    }
+
+    void Start()
+    {
+        if (isLocalPlayer)
+        {
+            Debug.Log(@"Local Player Start : is local player");
             this.name += "Local";
-	}
+            Camera.enabled = true;
+        }
+    }
 
     void Update()
     {
-        if (_isLocalPlayer)
+        if (isLocalPlayer)
         {
             if (Input.GetKey(KeyCode.Z))
             {
@@ -51,7 +59,7 @@ public class PlayerController : NetworkBehaviour
 	
 	void FixedUpdate ()
     {
-        if (_isLocalPlayer)
+        if (isLocalPlayer)
         {
             if (Input.GetKey(KeyCode.Z) || Input.GetKey(KeyCode.S))
             {

@@ -6,7 +6,7 @@ public class PlanePlayerController : MonoBehaviour
     public PlayerController Me;
 
 	// Use this for initialization
-	void Start () {
+	void Start (){
 	
 	}
 	
